@@ -42,30 +42,7 @@ public class Menu   {
 	@Column(name="description")
 	private String description = null;
 
-	@ManyToOne(cascade={CascadeType.ALL})
-	@JoinColumn(name="parent_id")
-	private Menu parent;
-	
-	@OneToMany(mappedBy="parent")
-	private List<Menu> childs = new ArrayList<Menu>();
-
-	public Menu getParent() {
-		return parent;
-	}
-
-	public void setParent(Menu parent) {
-		this.parent = parent;
-	}
-
-	public List<Menu> getChilds() {
-		return childs;
-	}
-
-	public void setChilds(List<Menu> childs) {
-		this.childs = childs;
-	}
-
-	public Integer getId() {
+    public Integer getId() {
 		return id;
 	}
 

@@ -1,66 +1,58 @@
 package com.altimetrik.chatBot.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.altimetrik.chatBot.entities.Menu;
+import com.altimetrik.chatBot.reposortory.IMenuDaoReposortory;
 
-@Repository
-public class MenuDaoImpl implements IMenuDao {
+@Component
+public class MenuDaoImpl {
 	private static final Logger logger = LoggerFactory.getLogger(MenuDaoImpl.class);
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	@Autowired
+	IMenuDaoReposortory iMenuDaoReposortory;
 	
-	@SuppressWarnings("unchecked")
 	public List<Menu> getMenu(Menu menu) {
 
 
 		if(menu.getMenuName().equals("")) {
-		Query query=entityManager.createQuery("select FROM chatbot.Menu where type = 'Root'",Menu.class);
-		return query.getResultList();
+			return iMenuDaoReposortory.getRootMenu();
 		}
 		else {
-			menu.setCount(menu.getCount()+1);
-			entityManager.persist(menu);
-			return menu.getChilds();
+			updateMenu(menu);
+			return iMenuDaoReposortory.getMenu(menu.getId());
 		}
 	}
 	
-	
-
-	public List<Menu> getMostTraversedPath() {
-		
-		Query query=entityManager.createNativeQuery("SELECT * FROM menu" + 
-				"		WHERE counter = (SELECT Max(counter) FROM menu)", Menu.class);
-
-		ArrayList<Menu> mostTraversedMenus = new ArrayList<>();
-		Menu menu = (Menu) query.getSingleResult();
-		mostTraversedMenus.add(menu);
-		Menu parentMenu = menu.getParent();
-		
-		if(parentMenu != null)
-		{
-			mostTraversedMenus.add(parentMenu);
-			if(parentMenu.getParent() != null)
-			{
-				mostTraversedMenus.add(parentMenu.getParent());
-			}
-		}
-		
-		return mostTraversedMenus;
-	}
-
-	public void updateCount(Menu menu) {
+	public void updateMenu(Menu menu) {
 		menu.setCount(menu.getCount()+1);
-		entityManager.persist(menu);
+		iMenuDaoReposortory.save(menu);
+	}
+
+	public List<Menu> getMostTraversedPath(List<Menu> allMenuItem) {
+		for(Menu menu:iMenuDaoReposortory.maxCounterNodes()) {
+			allMenuItem.add(menu);
+			getParentAll(allMenuItem,menu);
+		}
+		return	allMenuItem;
+		
+	}
+	public void getParentAll(List<Menu> allMenuItem,Menu childId){
+		if(childId.getType().equals("Root")) {
+			return;
+		}
+		allMenuItem.add(iMenuDaoReposortory.getParent(childId.getId()));
+		
+		getParentAll(allMenuItem,iMenuDaoReposortory.getParent(childId.getId()));
 	}
 }
