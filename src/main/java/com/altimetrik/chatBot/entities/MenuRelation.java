@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.altimetrik.chatBot.model.MenuRelationVo;
-
 @Entity
 @Table(name="menu_relation")
 public class MenuRelation   {
@@ -28,10 +26,7 @@ public class MenuRelation   {
     public MenuRelation() {
     	
     }
-    public MenuRelation(MenuRelationVo MenuRelation) {
-    this.parentNode	=MenuRelation.getParentNode();
-    this.childNode=MenuRelation.getChildNode();
-    }
+    
 	public Integer getId() {
 		return id;
 	}

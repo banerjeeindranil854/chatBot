@@ -1,48 +1,68 @@
 package com.altimetrik.chatBot.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.altimetrik.chatBot.model.MenuVo;
 
 /**
  * Menu
  */
 @Entity
-@Table(name = "menu")
-public class Menu {
+
+@Table(name="menu")
+public class Menu   {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "menu_id")
+	@Column(name="menu_id")
 	private Integer id = null;
 
-	@Column(name = "menu_name")
-	private String menuName = null;
-
-	@Column(name = "counter")
-	private String count = null;
-
-	@Column(name = "type")
-	private String type = null;
-
-	@Column(name = "description")
-	private String description = null;
-
-	public Menu(Menu menu) {
+	public Menu() {
 
 	}
+	@Column(name="menu_name")
+	private String menuName = null;
 
-	public Menu(MenuVo menuVo) {
-    this.id=menuVo.getId();
-    this.menuName=menuVo.getName();
-    this.count=menuVo.getCount();
-    this.type=menuVo.getType();
-    this.description=menuVo.getDescription();
+	@Column(name="counter")
+	private Integer count = null;
+
+	@Column(name="type")
+	private String type = null;
+
+	@Column(name="description")
+	private String description = null;
+
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="parent_id")
+	private Menu parent;
+	
+	@OneToMany(mappedBy="parent")
+	private List<Menu> childs = new ArrayList<Menu>();
+
+	public Menu getParent() {
+		return parent;
+	}
+
+	public void setParent(Menu parent) {
+		this.parent = parent;
+	}
+
+	public List<Menu> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<Menu> childs) {
+		this.childs = childs;
 	}
 
 	public Integer getId() {
@@ -61,11 +81,11 @@ public class Menu {
 		this.menuName = menuName;
 	}
 
-	public String getCount() {
+	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(String count) {
+	public void setCount(Integer count) {
 		this.count = count;
 	}
 

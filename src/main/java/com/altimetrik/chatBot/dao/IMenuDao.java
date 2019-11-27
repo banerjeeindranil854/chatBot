@@ -9,5 +9,7 @@ public interface IMenuDao {
 	List<Menu> getMenu(Menu menu);
 	
 	List<Menu> getMostTraversedPath();
+	
+	void updateCount(Menu menu);
 
 }
