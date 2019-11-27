@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import com.altimetrik.chatBot.entities.Menu;
 
+import antlr.StringUtils;
+
 @Repository
 public class MenuDaoImpl implements IMenuDao {
 	private static final Logger logger = LoggerFactory.getLogger(MenuDaoImpl.class);
@@ -24,7 +26,7 @@ public class MenuDaoImpl implements IMenuDao {
 	public List<Menu> getMenu(Menu menu) {
 
 
-		if(menu == null) {
+		if(menu.getMenuName().equals("")) {
 		Query query=entityManager.createQuery("select FROM Menu where type = 'Root'",Menu.class);
 		return query.getResultList();
 		}
