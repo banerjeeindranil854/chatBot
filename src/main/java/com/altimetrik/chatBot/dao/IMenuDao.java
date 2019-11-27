@@ -6,8 +6,10 @@ import com.altimetrik.chatBot.entities.Menu;
 
 public interface IMenuDao {
 	
-	List<Menu> getMenu(String menuName);
+	List<Menu> getMenu(Menu menu);
 	
-	String getMostTraversedPath();
+	List<Menu> getMostTraversedPath();
+	
+	void updateCount(Menu menu);
 
 }

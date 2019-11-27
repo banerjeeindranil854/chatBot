@@ -1,10 +1,18 @@
 package com.altimetrik.chatBot.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -13,27 +21,50 @@ import javax.persistence.Table;
 @Entity
 @Table(name="menu")
 public class Menu   {
-  
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="menu_id")
-  private Integer id = null;
+	private Integer id = null;
 
 	public Menu() {
-		
+
 	}
-	
+
 	@Column(name="menu_name")
-  private String menuName = null;
+	private String menuName = null;
 
 	@Column(name="counter")
-  private String count = null;
+	private Integer count = null;
 
 	@Column(name="type")
-  private String type = null;
+	private String type = null;
 
 	@Column(name="description")
-  private String description = null;
+	private String description = null;
+
+	@ManyToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="parent_id")
+	private Menu parent;
+	
+	@OneToMany(mappedBy="parent")
+	private List<Menu> childs = new ArrayList<Menu>();
+
+	public Menu getParent() {
+		return parent;
+	}
+
+	public void setParent(Menu parent) {
+		this.parent = parent;
+	}
+
+	public List<Menu> getChilds() {
+		return childs;
+	}
+
+	public void setChilds(List<Menu> childs) {
+		this.childs = childs;
+	}
 
 	public Integer getId() {
 		return id;
@@ -51,11 +82,11 @@ public class Menu   {
 		this.menuName = menuName;
 	}
 
-	public String getCount() {
+	public Integer getCount() {
 		return count;
 	}
 
-	public void setCount(String count) {
+	public void setCount(Integer count) {
 		this.count = count;
 	}
 
@@ -75,6 +106,6 @@ public class Menu   {
 		this.description = description;
 	}
 
-	
+
 }
 
