@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.altimetrik.chatBot.model.Menu;
+import com.altimetrik.chatBot.model.MenuVo;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +26,14 @@ import io.swagger.annotations.ApiResponses;
 @Api(value = "menus", description = "the menus API")
 public interface MenusApi {
 
-    @ApiOperation(value = "get all menue", nickname = "getMenu", notes = "get all the relevent menue", response = Menu.class, responseContainer = "List", tags={ "chatbotMenu", })
+    @ApiOperation(value = "get all menue", nickname = "getMenu", notes = "get all the relevent menue", response = MenuVo.class, responseContainer = "List", tags={ "chatbotMenu", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "generate successfuly bill", response = Menu.class, responseContainer = "List"),
+        @ApiResponse(code = 200, message = "generate successfuly bill", response = MenuVo.class, responseContainer = "List"),
         @ApiResponse(code = 405, message = "Invalid input") })
     @RequestMapping(value = "/menus",
         produces = { "application/xml", "application/json" }, 
         consumes = { "application/json", "application/xml" },
         method = RequestMethod.GET)
-    ResponseEntity<List<Menu>> getMenu(@ApiParam(value = "menu object"  )  @Valid @RequestBody Menu body);
+    ResponseEntity<List<MenuVo>> getMenu(@ApiParam(value = "menu object"  )  @Valid @RequestBody MenuVo body);
 
 }

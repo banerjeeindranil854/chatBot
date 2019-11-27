@@ -7,33 +7,43 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.altimetrik.chatBot.model.MenuVo;
+
 /**
  * Menu
  */
 @Entity
-@Table(name="menu")
-public class Menu   {
-  
+@Table(name = "menu")
+public class Menu {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="menu_id")
-  private Integer id = null;
+	@Column(name = "menu_id")
+	private Integer id = null;
 
-	public Menu() {
-		
+	@Column(name = "menu_name")
+	private String menuName = null;
+
+	@Column(name = "counter")
+	private String count = null;
+
+	@Column(name = "type")
+	private String type = null;
+
+	@Column(name = "description")
+	private String description = null;
+
+	public Menu(Menu menu) {
+
 	}
-	
-	@Column(name="menu_name")
-  private String menuName = null;
 
-	@Column(name="counter")
-  private String count = null;
-
-	@Column(name="type")
-  private String type = null;
-
-	@Column(name="description")
-  private String description = null;
+	public Menu(MenuVo menuVo) {
+    this.id=menuVo.getId();
+    this.menuName=menuVo.getName();
+    this.count=menuVo.getCount();
+    this.type=menuVo.getType();
+    this.description=menuVo.getDescription();
+	}
 
 	public Integer getId() {
 		return id;
@@ -75,6 +85,4 @@ public class Menu   {
 		this.description = description;
 	}
 
-	
 }
-

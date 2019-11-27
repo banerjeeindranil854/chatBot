@@ -1,14 +1,16 @@
 package com.altimetrik.chatBot.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.altimetrik.chatBot.entities.MenuRelation;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * MenuRelation
@@ -16,14 +18,18 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-27T09:47:09.303Z")
 
-public class MenuRelation   {
+public class MenuRelationVo   {
   @JsonProperty("parentNode")
   private BigDecimal parentNode = null;
 
   @JsonProperty("childNode")
   private BigDecimal childNode = null;
 
-  public MenuRelation parentNode(BigDecimal parentNode) {
+  public MenuRelationVo(MenuRelation MenuRelation) {
+	  this.parentNode=MenuRelation.getParentNode();
+	  this.childNode=MenuRelation.getChildNode();
+  }
+  public MenuRelationVo parentNode(BigDecimal parentNode) {
     this.parentNode = parentNode;
     return this;
   }
@@ -44,7 +50,7 @@ public class MenuRelation   {
     this.parentNode = parentNode;
   }
 
-  public MenuRelation childNode(BigDecimal childNode) {
+  public MenuRelationVo childNode(BigDecimal childNode) {
     this.childNode = childNode;
     return this;
   }
@@ -74,7 +80,7 @@ public class MenuRelation   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    MenuRelation menuRelation = (MenuRelation) o;
+    MenuRelationVo menuRelation = (MenuRelationVo) o;
     return Objects.equals(this.parentNode, menuRelation.parentNode) &&
         Objects.equals(this.childNode, menuRelation.childNode);
   }

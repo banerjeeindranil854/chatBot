@@ -2,6 +2,7 @@ package com.altimetrik.chatBot.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.altimetrik.chatBot.entities.Menu;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -15,7 +16,7 @@ import javax.validation.constraints.*;
 @Validated
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-11-27T09:47:09.303Z")
 
-public class Menu   {
+public class MenuVo   {
   @JsonProperty("id")
   private Integer id = null;
 
@@ -31,7 +32,14 @@ public class Menu   {
   @JsonProperty("description")
   private String description = null;
 
-  public Menu id(Integer id) {
+  public MenuVo(Menu Menu) {
+	  this.id=Menu.getId();
+	  this.description=Menu.getDescription();
+	  this.count=Menu.getCount();
+	  this.name=Menu.getMenuName();
+	  this.type=Menu.getType();
+  }
+  public MenuVo id(Integer id) {
     this.id = id;
     return this;
   }
@@ -51,7 +59,7 @@ public class Menu   {
     this.id = id;
   }
 
-  public Menu name(String name) {
+  public MenuVo name(String name) {
     this.name = name;
     return this;
   }
@@ -71,7 +79,7 @@ public class Menu   {
     this.name = name;
   }
 
-  public Menu count(String count) {
+  public MenuVo count(String count) {
     this.count = count;
     return this;
   }
@@ -91,7 +99,7 @@ public class Menu   {
     this.count = count;
   }
 
-  public Menu type(String type) {
+  public MenuVo type(String type) {
     this.type = type;
     return this;
   }
@@ -111,7 +119,7 @@ public class Menu   {
     this.type = type;
   }
 
-  public Menu description(String description) {
+  public MenuVo description(String description) {
     this.description = description;
     return this;
   }
@@ -140,7 +148,7 @@ public class Menu   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Menu menu = (Menu) o;
+    MenuVo menu = (MenuVo) o;
     return Objects.equals(this.id, menu.id) &&
         Objects.equals(this.name, menu.name) &&
         Objects.equals(this.count, menu.count) &&
