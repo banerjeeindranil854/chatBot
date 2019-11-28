@@ -16,17 +16,17 @@ public class MenuRelation   {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id")
-  private Integer id = null;
+	private Integer id = null;
 	@Column(name="parent_id")
-  private BigDecimal parentNode = null;
+	private BigDecimal parentNode = null;
 
 	@Column(name="child_id")
-  private BigDecimal childNode = null;
+	private BigDecimal childNode = null;
 
-    public MenuRelation() {
-    	
-    }
-    
+	public MenuRelation() {
+
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -52,7 +52,7 @@ public class MenuRelation   {
 	}
 
 
-	
+
 
 
 
