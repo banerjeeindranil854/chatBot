@@ -41,6 +41,7 @@ public class MenuDaoImpl {
 
 	public List<Menu> getMostTraversedPath(List<Menu> allMenuItem) {
 		for(Menu menu:iMenuDaoReposortory.maxCounterNodes()) {
+			allMenuItem.addAll(iMenuDaoReposortory.findAllChildNode(menu.getId()));
 			allMenuItem.add(menu);
 			getParentAll(allMenuItem,menu);
 		}

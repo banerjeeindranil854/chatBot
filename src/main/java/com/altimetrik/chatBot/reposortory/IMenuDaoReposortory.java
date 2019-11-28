@@ -31,4 +31,9 @@ public interface IMenuDaoReposortory extends JpaRepository<Menu, Integer>{
 			"and a.menu_id=b.parent_id", 
 			  nativeQuery = true)
 	Menu getParent(Integer id);
+	@Query(value = "select a.* from chatbot.menu a,chatbot.menu_relation b \r\n" + 
+			"where a.menu_id=b.child_id\r\n" + 
+			"and b.parent_id=?1", 
+			  nativeQuery = true)
+	List<Menu> findAllChildNode(Integer id);
 }

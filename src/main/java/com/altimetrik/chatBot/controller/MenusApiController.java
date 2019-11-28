@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @Api(value = "menus", description = "the menus API")
+@CrossOrigin
 public class MenusApiController {
 
     private static final Logger log = LoggerFactory.getLogger(MenusApiController.class);
@@ -53,7 +55,7 @@ public class MenusApiController {
     @RequestMapping(value = "/menus",
             produces = { "application/json" }, 
             consumes = { "application/json" },
-            method = RequestMethod.GET)
+            method = RequestMethod.POST)
     public ResponseEntity<List<Menu>> getMenu(@RequestHeader(name = "Content-Type", required = true) String contentType,
     		@RequestHeader(name = "Accept", required = true) String accept,
     		@ApiParam(value = "menu object"  )  @Valid @RequestBody Menu body) {
