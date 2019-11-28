@@ -51,14 +51,9 @@ public class MaxtraversedApiController{
         produces = { "application/json" }, 
         consumes = { "application/json" },
         method = RequestMethod.GET)
-    public ResponseEntity<List<Menu>> getTraversed(@RequestHeader(name = "Content-Type", required = true) String contentType,
-    		@RequestHeader(name = "Accept", required = true) String accept) {
-      
-        if (accept != null && accept.contains("application/json")) {
+    public ResponseEntity<List<Menu>> getTraversed() {
             return new ResponseEntity<List<Menu>>(chatBotServiceInterface.getMaxTraversal(), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<List<Menu>>(HttpStatus.NOT_IMPLEMENTED);
+        
     }
 
 }

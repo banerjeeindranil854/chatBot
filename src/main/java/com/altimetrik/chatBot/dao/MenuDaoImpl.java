@@ -2,9 +2,6 @@ package com.altimetrik.chatBot.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +14,9 @@ import com.altimetrik.chatBot.reposortory.IMenuDaoReposortory;
 public class MenuDaoImpl {
 	private static final Logger logger = LoggerFactory.getLogger(MenuDaoImpl.class);
 
-	@PersistenceContext
+	/*@PersistenceContext
 	private EntityManager entityManager;
-	@Autowired
+	*/@Autowired
 	IMenuDaoReposortory iMenuDaoReposortory;
 	
 	public List<Menu> getMenu(Menu menu) {

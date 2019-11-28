@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Menu
  */
@@ -25,21 +27,25 @@ public class Menu   {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="menu_id")
+	@JsonProperty(value = "id")
 	private Integer id = null;
 
 	public Menu() {
 
 	}
 	@Column(name="menu_name")
+	@JsonProperty(value = "menuName")
 	private String menuName = null;
 
 	@Column(name="counter")
+	@JsonProperty(value = "count")
 	private Integer count = null;
 
 	@Column(name="type")
 	private String type = null;
 
 	@Column(name="description")
+	@JsonProperty(value = "description")
 	private String description = null;
 
     public Integer getId() {

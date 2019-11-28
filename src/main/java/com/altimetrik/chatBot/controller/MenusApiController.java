@@ -53,16 +53,10 @@ public class MenusApiController {
     @RequestMapping(value = "/menus",
             produces = { "application/json" }, 
             consumes = { "application/json" },
-            method = RequestMethod.GET)
-    public ResponseEntity<List<Menu>> getMenu(@RequestHeader(name = "Content-Type", required = true) String contentType,
-    		@RequestHeader(name = "Accept", required = true) String accept,
+            method = RequestMethod.POST)
+    public ResponseEntity<List<Menu>> getMenu(
     		@ApiParam(value = "menu object"  )  @Valid @RequestBody Menu body) {
-
-        if (accept != null && accept.contains("application/json")) {
-            return new ResponseEntity<List<Menu>>(chatBotServiceInterface.getAllMenu(body), HttpStatus.OK);
-        }
-
-        return new ResponseEntity<List<Menu>>(HttpStatus.NOT_IMPLEMENTED);
+    	return new ResponseEntity<List<Menu>>(chatBotServiceInterface.getAllMenu(body), HttpStatus.OK);
     }
 
 }
